@@ -1,6 +1,7 @@
 import { Navigation } from "@/components/navigation"
 import { Hero } from "@/components/hero"
 import { About } from "@/components/about"
+import { Services } from "@/components/services"
 import { BentoGrid } from "@/components/bento-grid"
 import { Testimonials } from "@/components/testimonials"
 import { ContactSection } from "@/components/contact-section"
@@ -28,6 +29,12 @@ export default function Home() {
 
       <section id="about" className="bg-alternate">
         <About />
+      </section>
+
+      <div className="section-divider" />
+
+      <section id="services">
+        <Services />
       </section>
 
       <div className="section-divider" />

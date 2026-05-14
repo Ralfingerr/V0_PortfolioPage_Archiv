@@ -406,7 +406,7 @@ export function BentoGrid() {
 
         <div className="text-center mt-20">
           <p className="text-muted-foreground mb-8 text-lg">
-            Ready to scale your e-commerce with data-driven marketing?
+            Ready to scale your revenue?
           </p>
           <BookCallButton size="lg" className="px-10 h-14 text-lg" />
         </div>

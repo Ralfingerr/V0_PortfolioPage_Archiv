@@ -7,6 +7,7 @@ import { cn } from "@/lib/utils"
 
 const navLinks = [
   { href: "#about", label: "About" },
+  { href: "#services", label: "Services" },
   { href: "#work", label: "Work" },
   { href: "#testimonials", label: "Testimonials" },
   { href: "#contact", label: "Contact" },
@@ -105,7 +106,7 @@ export function Navigation() {
               </button>
             )
           })}
-          <BookCallButton variant="premium" size="sm" />
+          <BookCallButton variant="premium" size="sm" text="Let's work together" />
         </div>
 
         {/* Mobile Menu Button */}
@@ -139,7 +140,7 @@ export function Navigation() {
                 {link.label}
               </button>
             ))}
-            <BookCallButton variant="premium" size="default" className="mt-2 w-full" />
+            <BookCallButton variant="premium" size="default" className="mt-2 w-full" text="Let's work together" />
           </div>
         </div>
       )}

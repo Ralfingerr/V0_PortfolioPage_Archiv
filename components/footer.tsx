@@ -21,7 +21,7 @@ export function Footer() {
               <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Available for Q4 Projects</span>
             </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-              Scale your D2C brand with AI-powered email marketing and intelligent automation systems. Helping brands unlock untapped revenue through data.
+              AI Automation + Content for Shopify and DTC brands. Scale operations, automate content, and increase revenue through intelligent systems.
             </p>
             <div className="flex gap-4">
               <a 

@@ -18,16 +18,31 @@ export function About() {
             About Me
           </p>
           <h2 className="font-serif text-4xl md:text-5xl font-semibold text-foreground mb-6 text-balance">
-            Email Marketing & Automation for D2C Brands
+            Automation + Content for Online Businesses
           </h2>
           <div className="h-1 w-16 bg-gradient-to-r from-primary to-primary/50 rounded-full" />
         </div>
 
-        <div className="grid md:grid-cols-3 gap-12 items-start">
-          {/* Profile Photo Area */}
-          <div className="flex flex-col gap-8">
+        {/* Experience Highlights - Horizontal */}
+        <div className="flex flex-wrap gap-4 mb-16">
+          {highlights.map((item, index) => (
             <div 
-              className="rounded-2xl overflow-hidden w-full aspect-[4/5] flex-shrink-0 relative group"
+              key={index}
+              className="flex items-center gap-3 px-5 py-3 rounded-full bg-white/5 border border-white/10 hover:border-primary/30 transition-all group"
+            >
+              <div className="text-primary group-hover:scale-110 transition-transform">
+                {item.icon}
+              </div>
+              <span className="text-sm font-medium text-foreground/80 whitespace-nowrap">{item.label}</span>
+            </div>
+          ))}
+        </div>
+
+        <div className="grid md:grid-cols-12 gap-12 items-start">
+          {/* Profile Photo Area */}
+          <div className="md:col-span-4 flex flex-col gap-8">
+            <div 
+              className="rounded-2xl overflow-hidden w-full aspect-[4/5] flex-shrink-0 relative group shadow-2xl shadow-black/40"
               style={{
                 background: 'rgba(30, 27, 26, 0.6)',
                 backdropFilter: 'blur(12px)',
@@ -39,92 +54,44 @@ export function About() {
               <Image
                 src="/images/profile-new.jpg"
                 alt="Ralf Hillebrand"
-                width={320}
-                height={384}
-                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
+                width={400}
+                height={500}
+                className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-700"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent pointer-events-none" />
-            </div>
-
-            {/* Experience Highlights */}
-            <div className="grid grid-cols-1 gap-4">
-              {highlights.map((item, index) => (
-                <div 
-                  key={index}
-                  className="flex items-center gap-4 p-4 rounded-xl glass-hover"
-                >
-                  <div className="flex-shrink-0 w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center text-primary">
-                    {item.icon}
-                  </div>
-                  <span className="text-sm font-medium text-foreground">{item.label}</span>
-                </div>
-              ))}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent pointer-events-none" />
             </div>
           </div>
 
           {/* Main Content */}
-          <div className="md:col-span-2">
-            <div className="space-y-6 mb-12">
-              <p className="text-foreground text-xl font-medium leading-relaxed">
-                I&apos;m Ralf Hillebrand – Architecting Revenue-Generating Systems for E-commerce.
+          <div className="md:col-span-8">
+            <div className="space-y-8 max-w-2xl">
+              <p className="text-foreground text-2xl font-medium leading-tight">
+                I&apos;m Ralf Hillebrand – Building high-leverage systems for modern E-commerce.
               </p>
               
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                I help mid-sized e-commerce brands build marketing systems that work in two steps: attracting the right audience through intelligent content – then converting them into loyal customers through automated marketing flows.
-              </p>
+              <div className="space-y-6">
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  I help Shopify and DTC brands solve the bottleneck of manual operations and slow content production. By building intelligent AI systems, I help you scale without adding more overhead or complexity.
+                </p>
 
-              <p className="text-muted-foreground text-lg leading-relaxed">
-                Most brands treat email and content as separate silos. I bridge that gap using AI and automation to ensure your message reaches the right person at exactly the right moment, without the manual burnout.
-              </p>
-            </div>
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  From automated content pipelines to custom Shopify workflows, I ensure your business runs 24/7 on autopilot, allowing you to focus on strategy and growth.
+                </p>
 
-            <div className="grid sm:grid-cols-2 gap-6 mb-12">
-              <div className="p-6 rounded-xl glass-hover group">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Target className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-foreground mb-2">Content Strategy</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Attract high-intent visitors through social content and newsletters that build authority without the ad spend.
+                <p className="text-muted-foreground text-lg leading-relaxed">
+                  My approach combines data-driven marketing with cutting-edge automation tools like n8n and AI models to create systems that are not only efficient but also highly effective at driving revenue.
                 </p>
               </div>
 
-              <div className="p-6 rounded-xl glass-hover group">
-                <div className="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
-                  <Mail className="h-6 w-6 text-primary" />
-                </div>
-                <h4 className="font-semibold text-foreground mb-2">Retention Flows</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Convert first-time buyers into lifetime fans with automated email sequences that feel deeply personal.
-                </p>
+              <div className="pt-8 border-t border-white/5">
+                <a 
+                  href="#contact" 
+                  className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all"
+                >
+                  Let&apos;s build your system
+                  <ArrowRight className="w-5 h-5" />
+                </a>
               </div>
-            </div>
-
-            <div 
-              className="rounded-xl p-8 glass"
-            >
-              <h4 className="font-semibold text-white mb-6 flex items-center gap-2">
-                <ArrowRight className="h-5 w-5 text-primary" />
-                The Partnership Value
-              </h4>
-              <ul className="grid sm:grid-cols-2 gap-x-8 gap-y-4 text-muted-foreground text-sm">
-                <li className="flex items-start gap-3">
-                  <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                  <span>Content strategies that attract and build your audience</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                  <span>Email flows that double average customer lifetime value</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                  <span>Brand copy that sounds human, not like a template</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <div className="mt-1 w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0" />
-                  <span>Systems that run 24/7 so you can focus on scale</span>
-                </li>
-              </ul>
             </div>
           </div>
         </div>
