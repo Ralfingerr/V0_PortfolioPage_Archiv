@@ -1,131 +1,118 @@
 'use client'
 
-import { useRef, useEffect } from "react"
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "framer-motion"
+import { useEffect, useRef } from "react"
 
 export function HeaderBackground() {
-  const canvasRef = useRef<HTMLCanvasElement>(null)
+  const containerRef = useRef<HTMLDivElement>(null)
+  const mouseX = useMotionValue(0)
+  const mouseY = useMotionValue(0)
+
+  // Smooth mouse movement
+  const springX = useSpring(mouseX, { stiffness: 50, damping: 20 })
+  const springY = useSpring(mouseY, { stiffness: 50, damping: 20 })
 
   useEffect(() => {
-    const canvas = canvasRef.current
-    if (!canvas) return
-
-    const ctx = canvas.getContext("2d")
-    if (!ctx) return
-
-    let animationFrameId: number
-    let particles: Particle[] = []
-
-    const resize = () => {
-      canvas.width = window.innerWidth
-      canvas.height = window.innerHeight
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e
+      const { innerWidth, innerHeight } = window
+      // Normalize to -0.5 to 0.5
+      mouseX.set((clientX / innerWidth) - 0.5)
+      mouseY.set((clientY / innerHeight) - 0.5)
     }
 
-    class Particle {
-      x: number
-      y: number
-      size: number
-      speedX: number
-      speedY: number
-      opacity: number
+    window.addEventListener("mousemove", handleMouseMove)
+    return () => window.removeEventListener("mousemove", handleMouseMove)
+  }, [mouseX, mouseY])
 
-      constructor() {
-        this.x = Math.random() * canvas.width
-        this.y = Math.random() * canvas.height
-        this.size = Math.random() * 2 + 0.5
-        this.speedX = Math.random() * 0.3 - 0.15
-        this.speedY = Math.random() * 0.3 - 0.15
-        this.opacity = Math.random() * 0.5 + 0.1
-      }
-
-      update() {
-        this.x += this.speedX
-        this.y += this.speedY
-
-        if (this.x > canvas.width) this.x = 0
-        if (this.x < 0) this.x = canvas.width
-        if (this.y > canvas.height) this.y = 0
-        if (this.y < 0) this.y = canvas.height
-      }
-
-      draw() {
-        if (!ctx) return
-        ctx.fillStyle = `rgba(198, 124, 78, ${this.opacity * 0.5})` // Using primary color
-        ctx.beginPath()
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2)
-        ctx.fill()
-      }
-    }
-
-    const init = () => {
-      particles = []
-      const particleCount = Math.floor((canvas.width * canvas.height) / 15000)
-      for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle())
-      }
-    }
-
-    const animate = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height)
-      
-      // Draw grid lines
-      ctx.strokeStyle = "rgba(255, 255, 255, 0.03)"
-      ctx.lineWidth = 1
-      const step = 60
-      for (let x = 0; x < canvas.width; x += step) {
-        ctx.beginPath()
-        ctx.moveTo(x, 0)
-        ctx.lineTo(x, canvas.height)
-        ctx.stroke()
-      }
-      for (let y = 0; y < canvas.height; y += step) {
-        ctx.beginPath()
-        ctx.moveTo(0, y)
-        ctx.lineTo(canvas.width, y)
-        ctx.stroke()
-      }
-
-      // Draw connections
-      particles.forEach((p1, i) => {
-        p1.update()
-        p1.draw()
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const p2 = particles[j]
-          const dx = p1.x - p2.x
-          const dy = p1.y - p2.y
-          const distance = Math.sqrt(dx * dx + dy * dy)
-
-          if (distance < 150) {
-            ctx.strokeStyle = `rgba(198, 124, 78, ${0.1 * (1 - distance / 150)})`
-            ctx.lineWidth = 0.5
-            ctx.beginPath()
-            ctx.moveTo(p1.x, p1.y)
-            ctx.lineTo(p2.x, p2.y)
-            ctx.stroke()
-          }
-        }
-      })
-
-      animationFrameId = requestAnimationFrame(animate)
-    }
-
-    window.addEventListener("resize", resize)
-    resize()
-    init()
-    animate()
-
-    return () => {
-      window.removeEventListener("resize", resize)
-      cancelAnimationFrame(animationFrameId)
-    }
-  }, [])
+  // Parallax shifts for different layers
+  const layer1X = useTransform(springX, (v) => v * 100)
+  const layer1Y = useTransform(springY, (v) => v * 100)
+  
+  const layer2X = useTransform(springX, (v) => v * -150)
+  const layer2Y = useTransform(springY, (v) => v * -150)
+  
+  const layer3X = useTransform(springX, (v) => v * 50)
+  const layer3Y = useTransform(springY, (v) => v * 50)
 
   return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none z-[-1]"
-      style={{ opacity: 0.6 }}
-    />
+    <div ref={containerRef} className="absolute inset-0 overflow-hidden pointer-events-none z-[-1]">
+      {/* Base Grid - even more subtle */}
+      <div 
+        className="absolute inset-0 opacity-[0.03]" 
+        style={{ 
+          backgroundImage: `linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)`,
+          backgroundSize: '80px 80px'
+        }} 
+      />
+
+      {/* Layer 1: Large Ambient Glow (Primary Color) */}
+      <motion.div
+        style={{ x: layer1X, y: layer1Y }}
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{
+          duration: 15,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-[-10%] left-[-10%] w-[60%] h-[60%] rounded-full bg-primary/20 blur-[120px]"
+      />
+
+      {/* Layer 2: Deep Contrast (Deep Blue/Teal) */}
+      <motion.div
+        style={{ x: layer2X, y: layer2Y }}
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2
+        }}
+        className="absolute bottom-[-20%] right-[-10%] w-[70%] h-[70%] rounded-full bg-blue-600/10 blur-[150px]"
+      />
+
+      {/* Layer 3: Floating Accent Orbs */}
+      <motion.div
+        style={{ x: layer3X, y: layer3Y }}
+        animate={{
+          y: [0, -40, 0],
+          x: [0, 20, 0],
+        }}
+        transition={{
+          duration: 12,
+          repeat: Infinity,
+          ease: "easeInOut"
+        }}
+        className="absolute top-[20%] right-[15%] w-32 h-32 rounded-full bg-primary/30 blur-[60px]"
+      />
+
+      <motion.div
+        animate={{
+          y: [0, 50, 0],
+          x: [0, -30, 0],
+        }}
+        transition={{
+          duration: 18,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 1
+        }}
+        className="absolute bottom-[30%] left-[20%] w-48 h-48 rounded-full bg-primary/10 blur-[80px]"
+      />
+
+      {/* Vignette Overlay to focus attention on center */}
+      <div 
+        className="absolute inset-0 pointer-events-none" 
+        style={{
+          background: 'radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.4) 100%)'
+        }}
+      />
+    </div>
   )
 }
