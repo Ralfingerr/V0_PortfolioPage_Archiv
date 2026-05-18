@@ -8,7 +8,7 @@ import { useState, useMemo, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { cn } from "@/lib/utils"
 
-import { ProjectSidePanel } from "@/components/project-side-panel"
+import { ProjectExpandedView } from "@/components/project-expanded-view"
 
 const CATEGORIES = ["All", "Websites & Content", "Emails & Ads", "Automation", "Certificates"]
 
@@ -256,7 +256,7 @@ export function BentoGrid() {
             {filteredItems.map((item) => (
               <motion.div
                 key={item.id}
-                layout
+                layoutId={`card-${item.id}`}
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.9 }}
@@ -264,78 +264,67 @@ export function BentoGrid() {
                 className={cn(
                   item.highlight && activeFilter === "All" ? "md:col-span-2 lg:col-span-2" : ""
                 )}
+                onClick={() => {
+                  if (item.category === "Certificates") {
+                    setSelectedCertificate(item.id)
+                  } else {
+                    setSelectedProject(item)
+                  }
+                }}
               >
                 <GlassCard 
                   className="h-full overflow-hidden group flex flex-col cursor-pointer"
                   hover
-                  onClick={() => {
-                    if (item.category === "Certificates") {
-                      setSelectedCertificate(item.id)
-                    } else {
-                      setSelectedProject(item)
-                    }
-                  }}
                 >
                   <div className={cn(
                     "relative overflow-hidden bg-muted",
                     item.category === "Certificates" ? "aspect-[4/3] p-4 bg-white/5" : "aspect-video"
                   )}>
-                    <Image
-                      src={item.image}
-                      alt={item.title}
-                      fill
-                      className={cn(
-                        "transition-transform duration-700 group-hover:scale-105",
-                        item.category === "Certificates" ? "object-contain p-4" : "object-cover object-top"
-                      )}
-                    />
+                    <motion.div 
+                      layoutId={`image-${item.id}`}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={item.image}
+                        alt={item.title}
+                        fill
+                        className={cn(
+                          "transition-transform duration-700 group-hover:scale-105",
+                          item.category === "Certificates" ? "object-contain p-4" : "object-cover object-top"
+                        )}
+                      />
+                    </motion.div>
                     
                     {/* Metric Badge */}
                     {item.metric && (
-                      <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2 shadow-xl">
+                      <div className="absolute top-4 left-4 bg-primary/90 backdrop-blur-md px-3 py-1 rounded-full flex items-center gap-2 shadow-xl z-10">
                         <TrendingUp className="w-3 h-3 text-primary-foreground" />
                         <span className="text-xs font-bold text-primary-foreground">{item.metric}</span>
                       </div>
                     )}
 
                     {/* Category Badge */}
-                    <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10">
+                    <div className="absolute top-4 right-4 bg-black/40 backdrop-blur-md px-3 py-1 rounded-full border border-white/10 z-10">
                       <span className="text-[10px] uppercase tracking-widest font-bold text-white/80">{item.type}</span>
                     </div>
 
-                    {/* Hover Overlay for Projects */}
-                    {item.url && (
-                      <a
-                        href={item.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="absolute inset-0 bg-background/60 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none group-hover:pointer-events-auto"
-                        onClick={(e) => e.stopPropagation()}
-                      >
-                        <div className="flex items-center gap-2 bg-primary text-primary-foreground px-6 py-2 rounded-full font-medium shadow-xl transform translate-y-4 group-hover:translate-y-0 transition-transform">
-                          <span>Visit Site</span>
-                          <ExternalLink className="w-4 h-4" />
-                        </div>
-                      </a>
-                    )}
-
-                    {/* Quick View for Certificates */}
-                    {item.category === "Certificates" && (
-                      <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
-                        <Search className="w-8 h-8 text-white/50" />
-                      </div>
-                    )}
+                    {/* Quick View Overlay */}
+                    <div className="absolute inset-0 bg-background/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                      <Search className="w-8 h-8 text-white/50" />
+                    </div>
                   </div>
 
                   <div className="p-8 flex flex-col flex-grow">
                     <div className="flex items-start justify-between gap-4 mb-4">
-                      <h3 className={cn(
+                      <motion.h3 
+                        layoutId={`title-${item.id}`}
+                        className={cn(
                         "font-serif font-semibold text-foreground leading-tight",
                         item.highlight && activeFilter === "All" ? "text-2xl" : "text-xl"
                       )}>
                         {item.title}
-                      </h3>
-                      {item.url && <ArrowUpRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />}
+                      </motion.h3>
+                      <ArrowUpRight className="w-5 h-5 text-primary opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                     
                     <p className="text-muted-foreground text-sm leading-relaxed mb-6">
@@ -411,10 +400,9 @@ export function BentoGrid() {
           <BookCallButton size="lg" className="px-10 h-14 text-lg" />
         </div>
 
-        <ProjectSidePanel 
-          isOpen={!!selectedProject} 
-          onClose={() => setSelectedProject(null)} 
+        <ProjectExpandedView 
           project={selectedProject} 
+          onClose={() => setSelectedProject(null)} 
         />
       </div>
     </section>
