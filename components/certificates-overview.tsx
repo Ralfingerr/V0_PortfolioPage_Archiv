@@ -37,7 +37,7 @@ export function CertificatesOverview() {
         </p>
         <div className="flex flex-wrap justify-center items-center gap-6 md:gap-10">
           {certificates.map((cert) => (
-            <div key={cert.id} className="relative h-16 w-24 md:h-20 md:w-28 opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 rounded-md overflow-hidden bg-white/5">
+            <div key={cert.id} className="relative h-24 w-36 md:h-32 md:w-48 opacity-60 hover:opacity-100 transition-opacity grayscale hover:grayscale-0 rounded-md overflow-hidden bg-white/5">
               <Image
                 src={cert.image}
                 alt={cert.title}

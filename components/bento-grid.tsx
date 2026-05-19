@@ -21,7 +21,7 @@ const portfolioItems = [
     description: "Organic meat e-commerce store with email marketing automation and customer retention flows.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/screencapture-bio-theke-de-2026-03-20-14_25_42.png-wXgmtroSThY1LVzO6WUDSOiFGnhELj.jpeg",
     url: "https://bio-theke.de",
-    metric: "+45% Retention",
+    metric: "1.400€ monthly revenue",
     highlight: true,
     details: {
       challenge: "High customer acquisition costs with low repeat purchase rates in the organic fresh food niche.",
@@ -41,7 +41,7 @@ const portfolioItems = [
     description: "Men's skincare brand with AI-powered content and email sequences driving repeat purchases.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/screencapture-maleup-de-products-instant-repair-2026-03-11-21_15_11.png-pl05vIQdN6fBUvJ2shInM4YWTBCgI1.jpeg",
     url: "https://maleup.de",
-    metric: "40%+ Repeat Orders",
+    metric: "16% higher clickrate",
     highlight: true,
     details: {
       challenge: "Men's skincare is highly transactional; the brand struggled to build a loyal 'routine-based' community.",
@@ -61,7 +61,7 @@ const portfolioItems = [
     description: "Sustainable protein snacks with automated marketing campaigns and Black Friday strategies.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/screencapture-buffalo-jerky.de.png-Mnpqh5rMywzBNzr5RVJdXMuaArRaSD.jpeg",
     url: "https://buffalo-jerky.de",
-    metric: "+774% YoY ROI",
+    metric: "4 days for launch",
     highlight: false,
     details: {
       challenge: "Scaling sales during peak holiday periods without relying solely on deep discounting.",
@@ -80,7 +80,7 @@ const portfolioItems = [
     title: "AI Workflow Integration",
     description: "Custom AI-driven automation for content creation and distribution workflows.",
     image: "/images/portfolio/automation-new.jpg",
-    metric: "80% Time Saved",
+    metric: "8h saved each week",
     highlight: false,
     details: {
       challenge: "Manual content distribution across multiple channels was consuming 20+ hours per week.",

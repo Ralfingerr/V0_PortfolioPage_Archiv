@@ -18,7 +18,7 @@ export function Footer() {
             </p>
             <div className="flex gap-4">
               <a 
-                href="https://linkedin.com" 
+                href="https://www.linkedin.com/in/ralf-h-a1384510b/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="text-muted-foreground hover:text-primary transition-colors"
@@ -85,21 +85,6 @@ export function Footer() {
 
         {/* Divider */}
         <div className="border-t border-white/10 pt-8">
-          {/* Tax/Business Info */}
-          <div className="mb-8 pb-8 border-b border-white/10">
-            <h4 className="font-semibold text-foreground mb-4 text-sm">Geschäftsinformationen</h4>
-            <div className="grid md:grid-cols-2 gap-4 text-sm text-muted-foreground">
-              <div>
-                <p className="text-xs text-foreground/60 uppercase tracking-wide mb-1">Steuernummer</p>
-                <p>XX XXX XXXXXX</p>
-              </div>
-              <div>
-                <p className="text-xs text-foreground/60 uppercase tracking-wide mb-1">USt-IdNr</p>
-                <p>DE XXXXXXXXX</p>
-              </div>
-            </div>
-          </div>
-
           {/* Copyright & Credits */}
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="text-muted-foreground text-sm">
