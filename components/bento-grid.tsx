@@ -10,7 +10,7 @@ import { cn } from "@/lib/utils"
 
 import { ProjectExpandedView } from "@/components/project-expanded-view"
 
-const CATEGORIES = ["All", "Websites & Content", "Emails & Ads", "Automation", "Certificates"]
+const CATEGORIES = ["All", "Websites & Content", "Emails & Ads", "Automation"]
 
 const portfolioItems = [
   {
@@ -55,8 +55,8 @@ const portfolioItems = [
   },
   {
     id: "p3",
-    type: "Emails & Ads",
-    category: "Emails & Ads",
+    type: "Websites & Content",
+    category: "Websites & Content",
     title: "Buffalo Jerky",
     description: "Sustainable protein snacks with automated marketing campaigns and Black Friday strategies.",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/screencapture-buffalo-jerky.de.png-Mnpqh5rMywzBNzr5RVJdXMuaArRaSD.jpeg",
@@ -98,7 +98,7 @@ const portfolioItems = [
     category: "Emails & Ads",
     title: "Gmail Campaign Suite",
     description: "Highly optimized Gmail-native email designs for maximum deliverability and engagement.",
-    image: "/images/portfolio/screencapture-mail-google-mail-u-3-2026-05-11-12_00_54.png",
+    image: "/images/portfolio/screencapture-mail-google-mail-u-3-2026-05-11-12_00_54 (1).png",
     metric: "99% Deliverability",
     highlight: false,
     details: {
@@ -117,7 +117,7 @@ const portfolioItems = [
     category: "Emails & Ads",
     title: "Black Friday Campaign",
     description: "Strategic Black Friday email campaign with high-converting layouts and urgency-driven design.",
-    image: "/images/portfolio/BlackFriday_EmailKampagne.png",
+    image: "/images/portfolio/email_design.png",
     metric: "+120% Sales Lift",
     highlight: false,
     details: {
@@ -149,52 +149,11 @@ const portfolioItems = [
       ]
     }
   },
-  {
-    id: "c5",
-    type: "Certificates",
-    category: "Certificates",
-    title: "Klaviyo Product Certificate",
-    issuer: "Klaviyo Academy",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/klavyio_certificate-nAxf7lBBmUD5DAOhoA5EFfQI0SLsa3.png",
-  },
-  {
-    id: "c1",
-    type: "Certificates",
-    category: "Certificates",
-    title: "HubSpot E-Mail Marketing",
-    issuer: "HubSpot Academy",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/e-mail_marketing_certificate-cawMJhNNd2PzSYRhTLvSyVANtFlYBR.jpg",
-  },
-  {
-    id: "c2",
-    type: "Certificates",
-    category: "Certificates",
-    title: "Content Marketing",
-    issuer: "HubSpot Academy",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/hubspot_content_marketing_certificate-I4CVmxZ5QeFAVO1QWIHpPjg9VgmSLP.jpg",
-  },
-  {
-    id: "c3",
-    type: "Certificates",
-    category: "Certificates",
-    title: "Advanced Email Marketing",
-    issuer: "Simplilearn SkillUp",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/advanced_email_marketing_certificate-mfK7DniRzo2HjsSTKKK1Edihqp4oG5.jpg",
-  },
-  {
-    id: "c4",
-    type: "Certificates",
-    category: "Certificates",
-    title: "Mailchimp Email Campaigns",
-    issuer: "Coursera",
-    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/advanced_email_marketing_certificate_mailchimp-XHI1eii9UG0mTTTpAilegep5lFmvfi.jpg",
-  },
 ]
 
 export function BentoGrid() {
   const [activeFilter, setActiveFilter] = useState("All")
   const [showAll, setShowAll] = useState(false)
-  const [selectedCertificate, setSelectedCertificate] = useState<string | null>(null)
   const [selectedProject, setSelectedProject] = useState<typeof portfolioItems[0] | null>(null)
 
   // Reset showAll when filter changes
@@ -264,13 +223,7 @@ export function BentoGrid() {
                 className={cn(
                   item.highlight && activeFilter === "All" ? "md:col-span-2 lg:col-span-2" : ""
                 )}
-                onClick={() => {
-                  if (item.category === "Certificates") {
-                    setSelectedCertificate(item.id)
-                  } else {
-                    setSelectedProject(item)
-                  }
-                }}
+                onClick={() => setSelectedProject(item)}
               >
                 <GlassCard 
                   className="h-full overflow-hidden group flex flex-col cursor-pointer"
@@ -278,7 +231,7 @@ export function BentoGrid() {
                 >
                   <div className={cn(
                     "relative overflow-hidden bg-muted",
-                    item.category === "Certificates" ? "aspect-[4/3] p-4 bg-white/5" : "aspect-video"
+                    "aspect-video"
                   )}>
                     <motion.div 
                       layoutId={`image-${item.id}`}
@@ -290,7 +243,7 @@ export function BentoGrid() {
                         fill
                         className={cn(
                           "transition-transform duration-700 group-hover:scale-105",
-                          item.category === "Certificates" ? "object-contain p-4" : "object-cover object-top"
+                          "object-cover object-top"
                         )}
                       />
                     </motion.div>
@@ -357,41 +310,7 @@ export function BentoGrid() {
           </div>
         )}
 
-        {/* Certificate Modal */}
-        <AnimatePresence>
-          {selectedCertificate && (
-            <motion.div 
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center bg-background/90 backdrop-blur-md p-4"
-              onClick={() => setSelectedCertificate(null)}
-            >
-              <motion.div 
-                initial={{ scale: 0.9, y: 20 }}
-                animate={{ scale: 1, y: 0 }}
-                exit={{ scale: 0.9, y: 20 }}
-                className="relative max-w-4xl w-full"
-                onClick={(e) => e.stopPropagation()}
-              >
-                <div className="relative aspect-[4/3] bg-white rounded-2xl overflow-hidden shadow-2xl">
-                  <Image
-                    src={portfolioItems.find(c => c.id === selectedCertificate)?.image || ''}
-                    alt="Certificate"
-                    fill
-                    className="object-contain p-8"
-                  />
-                </div>
-                <button 
-                  className="absolute -top-12 right-0 md:-right-12 text-white hover:text-primary transition-colors text-4xl"
-                  onClick={() => setSelectedCertificate(null)}
-                >
-                  &times;
-                </button>
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+        {/* Certificate Modal Removed */}
 
         <div className="text-center mt-20">
           <p className="text-muted-foreground mb-8 text-lg">

@@ -13,13 +13,6 @@ export function Footer() {
             <h3 className="font-serif text-xl font-semibold text-foreground mb-4">
               Ralf Hillebrand
             </h3>
-            <div className="flex items-center gap-2 mb-6">
-              <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-              </span>
-              <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Available for Q4 Projects</span>
-            </div>
             <p className="text-muted-foreground text-sm leading-relaxed mb-6">
               AI Automation + Content for Shopify and DTC brands. Scale operations, automate content, and increase revenue through intelligent systems.
             </p>
@@ -45,22 +38,10 @@ export function Footer() {
                 <div>
                   <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Email</p>
                   <a 
-                    href="mailto:hello@ralfhillebrand.de"
+                    href="mailto:ralf@ralfhillebrand.de"
                     className="text-foreground hover:text-primary transition-colors text-sm"
                   >
-                    hello@ralfhillebrand.de
-                  </a>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <Phone className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                <div>
-                  <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Telefon</p>
-                  <a 
-                    href="tel:+491234567890"
-                    className="text-foreground hover:text-primary transition-colors text-sm"
-                  >
-                    +49 (123) 456-7890
+                    ralf@ralfhillebrand.de
                   </a>
                 </div>
               </div>
@@ -69,7 +50,7 @@ export function Footer() {
                 <div>
                   <p className="text-xs text-muted-foreground uppercase tracking-wide mb-1">Adresse</p>
                   <p className="text-foreground text-sm">
-                    Berlin, Deutschland
+                    Zu den Neuen Wiesen 5, 35644 Hohenahr
                   </p>
                 </div>
               </div>

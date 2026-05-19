@@ -78,13 +78,6 @@ export function Navigation() {
 
         {/* Desktop Navigation */}
         <div className="hidden md:flex items-center gap-8">
-          <div className="flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 mr-4">
-            <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
-            </span>
-            <span className="text-[10px] font-bold uppercase tracking-wider text-primary">Available for Q4</span>
-          </div>
           {navLinks.map((link) => {
             const sectionId = link.href.substring(1)
             const isActive = activeSection === sectionId
@@ -106,7 +99,7 @@ export function Navigation() {
               </button>
             )
           })}
-          <BookCallButton variant="premium" size="sm" text="Let's work together" />
+          <BookCallButton variant="premium" size="sm" text="Let's work together" onClick={() => handleNavClick("#contact")} />
         </div>
 
         {/* Mobile Menu Button */}
@@ -140,7 +133,7 @@ export function Navigation() {
                 {link.label}
               </button>
             ))}
-            <BookCallButton variant="premium" size="default" className="mt-2 w-full" text="Let's work together" />
+            <BookCallButton variant="premium" size="default" className="mt-2 w-full" text="Let's work together" onClick={() => handleNavClick("#contact")} />
           </div>
         </div>
       )}

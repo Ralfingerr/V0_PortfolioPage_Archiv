@@ -5,19 +5,19 @@ import Image from "next/image"
 const testimonials = [
   {
     id: 1,
-    quote: "Ralf transformed our entire retention flow. Our repeat customer rate saw a significant boost within the first 90 days. His attention to brand voice is unmatched.",
-    name: "Founder",
-    company: "Biotheke",
+    quote: "Working with Ralf was a great experience. He quickly got up to speed on a new and complex topic, delivered high-quality writing, and communicated clearly throughout the project. I especially appreciated his fast replies, thoughtful questions, and reliability in meeting deadlines. Last but not least, he was open to feedback and adapted quickly, which made collaboration effortless. I'll happily work with him again and certainly recommend him!",
+    name: "Sören",
+    company: "Go Vocal",
     role: "CEO",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ralf_Profile-JqeusRMYfXP6HDW7xDDDh56iv8ody4.png", // Using Ralf's for now as fallback
     rating: 5,
   },
   {
     id: 2,
-    quote: "The AI automation for our skincare brand finally feels personal. We saw a 40% increase in recurring revenue without adding any extra headcount.",
-    name: "Marketing Lead",
-    company: "maleup",
-    role: "Head of Growth",
+    quote: "Ich habe mit Ralf für ein HR-Content-Projekt zusammengearbeitet und kann ihn uneingeschränkt empfehlen. Er lieferte immer zuverlässig qualitativen Content, der überzeugte und über die Vorgaben hinaus performte.",
+    name: "Dorothea",
+    company: "Content Marketing Manager",
+    role: "Content Marketing Manager",
     image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Ralf_Profile-JqeusRMYfXP6HDW7xDDDh56iv8ody4.png",
     rating: 5,
   },

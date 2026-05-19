@@ -11,13 +11,15 @@ interface BookCallButtonProps {
   size?: "default" | "sm" | "lg"
   className?: string
   text?: string
+  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 }
 
 export function BookCallButton({ 
   variant = "default", 
   size = "default",
   className,
-  text = "Book a call"
+  text = "Book a call",
+  onClick
 }: BookCallButtonProps) {
   const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || "#"
   const buttonRef = useRef<HTMLButtonElement>(null)
@@ -61,7 +63,11 @@ export function BookCallButton({
     return () => window.removeEventListener("mousemove", handleMouseMove)
   }, [])
   
-  const handleClick = () => {
+  const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (onClick) {
+      onClick(e)
+      return
+    }
     if (calendlyUrl && calendlyUrl !== "#") {
       window.open(calendlyUrl, "_blank", "noopener,noreferrer")
     }

@@ -10,6 +10,7 @@ import { FloatingElements } from "@/components/floating-elements"
 
 import { TrustSignals } from "@/components/trust-signals"
 import { Atmosphere } from "@/components/atmosphere"
+import { CertificatesOverview } from "@/components/certificates-overview"
 
 export default function Home() {
   return (
@@ -42,6 +43,8 @@ export default function Home() {
       <section id="work" className="bg-alternate">
         <BentoGrid />
       </section>
+
+      <CertificatesOverview />
 
       <div className="section-divider" />
 
